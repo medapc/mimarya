@@ -1,0 +1,42 @@
+---
+const services = [
+  {
+    number: "01",
+    category: "Konut",
+    title: "Mimari Tasarım",
+    text: "Yeni yapı, renovasyon ve dönüşüm projelerinde arsadan detaya bütüncül tasarım."
+  },
+  {
+    number: "02",
+    category: "Ticari",
+    title: "İç Mekan Tasarımı",
+    text: "Marka kimliği, kullanım akışı ve malzeme dilini aynı masada buluşturan mekanlar."
+  },
+  {
+    number: "03",
+    category: "Uygulama",
+    title: "Proje Yönetimi",
+    text: "Keşif, teknik çizim, tedarik ve saha koordinasyonunda kontrollü ilerleyen süreç."
+  }
+];
+---
+
+<section id="services" class="panel services">
+  <div class="section-intro">
+    <p class="eyebrow">design matters</p>
+    <h2>Mimari kararları, gündelik hayatın ritmine göre kuruyoruz.</h2>
+  </div>
+  <div class="service-list">
+    {
+      services.map((service) => (
+        <article class="service-card">
+          <span>{service.number}</span>
+          <p>{service.category}</p>
+          <h3>{service.title}</h3>
+          <p>{service.text}</p>
+          <a href="#contact">Detaylı görüşme</a>
+        </article>
+      ))
+    }
+  </div>
+</section>

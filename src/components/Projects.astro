@@ -1,0 +1,56 @@
+---
+const projects = [
+  {
+    category: "Residential",
+    title: "Taş Ev Renovasyonu",
+    text: "Doğal taş, ahşap ve gün ışığıyla sakin bir yaşam omurgası.",
+    image: "/assets/residential.png",
+    alt: "Sculptural merdivenli çağdaş konut iç mekanı",
+    width: 1024,
+    height: 1536
+  },
+  {
+    category: "Hospitality",
+    title: "Galeri Lobi",
+    text: "Karşılama alanını sıcak, yönlendirici ve hatırlanır bir mekana dönüştüren tasarım.",
+    image: "/assets/hospitality.png",
+    alt: "Özel üretim mobilyalı butik otel lobi tasarımı",
+    width: 1536,
+    height: 1024
+  },
+  {
+    category: "Workspace",
+    title: "Atölye Ofis",
+    text: "Yaratıcı ekipler için açık, konsantre ve esnek bir çalışma kurgusu.",
+    image: "/assets/studio.png",
+    alt: "Mimari maketlerin bulunduğu modern çalışma stüdyosu",
+    width: 1774,
+    height: 887
+  }
+];
+---
+
+<section id="projects" class="projects" aria-label="Öne çıkan projeler">
+  {
+    projects.map((project, index) => (
+      <article class:list={["project", { "is-active": index === 0 }]}>
+        <img
+          src={project.image}
+          alt={project.alt}
+          width={project.width}
+          height={project.height}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding="async"
+        />
+        <div>
+          <p class="eyebrow">{project.category}</p>
+          <h2>{project.title}</h2>
+          <p>{project.text}</p>
+        </div>
+      </article>
+    ))
+  }
+  <div class="project-controls" aria-label="Proje seçimi">
+    {projects.map((_, index) => <button type="button" class:list={{ "is-active": index === 0 }} data-project={index}>{String(index + 1).padStart(2, "0")}</button>)}
+  </div>
+</section>
