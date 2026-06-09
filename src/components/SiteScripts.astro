@@ -2,6 +2,7 @@
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".primary-nav");
+  const openingLogo = document.querySelector(".opening-logo");
   const projects = [...document.querySelectorAll(".project")];
   const projectButtons = [...document.querySelectorAll("[data-project]")];
 
@@ -33,5 +34,8 @@
   });
 
   window.addEventListener("scroll", setHeader, { passive: true });
+  window.setTimeout(() => {
+    openingLogo?.classList.add("is-hidden");
+  }, 2600);
   setHeader();
 </script>

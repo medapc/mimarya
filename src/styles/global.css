@@ -32,6 +32,58 @@ a {
   text-decoration: none;
 }
 
+.opening-logo {
+  align-items: center;
+  animation: openingLogoExit 1500ms ease 850ms forwards;
+  background: #f8f8f6;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  pointer-events: none;
+  position: fixed;
+  z-index: 100;
+}
+
+.opening-logo img {
+  animation: openingLogoMark 1500ms ease forwards;
+  max-width: min(520px, 72vw);
+  opacity: 0;
+}
+
+.opening-logo.is-hidden {
+  display: none;
+}
+
+@keyframes openingLogoMark {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+
+  28%,
+  62% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes openingLogoExit {
+  0%,
+  72% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 .site-header {
   align-items: center;
   color: var(--light);
