@@ -34,8 +34,10 @@ a {
 
 .opening-logo {
   align-items: center;
-  animation: openingLogoExit 1500ms ease 850ms forwards;
-  background: #f8f8f6;
+  animation: openingLogoExit 900ms ease 3100ms forwards;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(183, 155, 107, 0.1), transparent 34%),
+    linear-gradient(135deg, #fbfbf8 0%, #f5f2ec 100%);
   display: flex;
   inset: 0;
   justify-content: center;
@@ -44,43 +46,161 @@ a {
   z-index: 100;
 }
 
-.opening-logo img {
-  animation: openingLogoMark 1500ms ease forwards;
-  max-width: min(520px, 72vw);
+.opening-logo__stage {
+  align-items: center;
+  animation: openingLogoFloat 3400ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  aspect-ratio: 800 / 156;
+  display: grid;
+  justify-items: center;
+  max-width: min(620px, 78vw);
+  position: relative;
+  width: 100%;
+}
+
+.opening-logo__stage::before {
+  background: linear-gradient(90deg, transparent, rgba(183, 155, 107, 0.34), transparent);
+  content: "";
+  height: 1px;
   opacity: 0;
+  position: absolute;
+  top: calc(100% + 28px);
+  transform: scaleX(0.12);
+  transform-origin: center;
+  width: 84%;
+  animation: openingLogoLine 2600ms ease 420ms forwards;
+}
+
+.opening-logo__pulse {
+  animation: openingLogoPulse 1550ms ease-out 620ms forwards;
+  border: 1px solid rgba(183, 155, 107, 0.28);
+  border-radius: 999px;
+  height: 140%;
+  opacity: 0;
+  position: absolute;
+  width: 112%;
+}
+
+.opening-logo__pulse--delay {
+  animation-delay: 1000ms;
+}
+
+.opening-logo img {
+  animation: openingLogoMark 3200ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  display: block;
+  filter: drop-shadow(0 18px 34px rgba(16, 35, 57, 0.08));
+  height: auto;
+  max-height: 156px;
+  max-width: 100%;
+  opacity: 0;
+  object-fit: contain;
+  width: auto;
 }
 
 .opening-logo.is-hidden {
   display: none;
 }
 
+@keyframes openingLogoFloat {
+  0% {
+    transform: translateY(10px);
+  }
+
+  48%,
+  78% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
 @keyframes openingLogoMark {
   0% {
     opacity: 0;
-    transform: translateY(12px) scale(0.97);
+    transform: scale(0.96);
   }
 
-  28%,
-  62% {
+  22% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+
+  46% {
+    opacity: 1;
+    transform: scale(0.992);
+  }
+
+  58%,
+  82% {
+    opacity: 1;
+    transform: scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-10px) scale(1.02);
+    transform: scale(0.985);
+  }
+}
+
+@keyframes openingLogoPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  18% {
+    opacity: 0.55;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes openingLogoLine {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.12);
+  }
+
+  28%,
+  76% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(0.82);
   }
 }
 
 @keyframes openingLogoExit {
-  0%,
-  72% {
+  0% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
     visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening-logo,
+  .opening-logo__stage,
+  .opening-logo__stage::before,
+  .opening-logo__pulse,
+  .opening-logo img {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
   }
 }
 
