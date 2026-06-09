@@ -34,9 +34,10 @@ a {
 
 .opening-logo {
   align-items: center;
-  animation: openingLogoExit 900ms ease 3100ms forwards;
+  animation: openingLogoExit 850ms ease 3200ms forwards;
   background:
-    radial-gradient(circle at 50% 48%, rgba(183, 155, 107, 0.1), transparent 34%),
+    radial-gradient(circle at 50% 46%, rgba(183, 155, 107, 0.16), transparent 24%),
+    radial-gradient(circle at 48% 52%, rgba(18, 38, 62, 0.1), transparent 35%),
     linear-gradient(135deg, #fbfbf8 0%, #f5f2ec 100%);
   display: flex;
   inset: 0;
@@ -48,7 +49,7 @@ a {
 
 .opening-logo__stage {
   align-items: center;
-  animation: openingLogoFloat 3400ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: openingLogoStage 3600ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
   aspect-ratio: 800 / 156;
   display: grid;
   justify-items: center;
@@ -58,7 +59,28 @@ a {
 }
 
 .opening-logo__stage::before {
-  background: linear-gradient(90deg, transparent, rgba(183, 155, 107, 0.34), transparent);
+  animation: openingLogoOrbit 2700ms cubic-bezier(0.19, 1, 0.22, 1) 260ms forwards;
+  background: conic-gradient(
+    from 120deg,
+    transparent,
+    rgba(183, 155, 107, 0.18),
+    rgba(18, 38, 62, 0.2),
+    rgba(183, 155, 107, 0.3),
+    transparent 70%
+  );
+  border-radius: 999px;
+  content: "";
+  filter: blur(1px);
+  height: 190%;
+  opacity: 0;
+  position: absolute;
+  transform: scale(0.62) rotate(-24deg);
+  width: 118%;
+}
+
+.opening-logo__stage::after {
+  animation: openingLogoLine 2800ms ease 460ms forwards;
+  background: linear-gradient(90deg, transparent, rgba(183, 155, 107, 0.42), transparent);
   content: "";
   height: 1px;
   opacity: 0;
@@ -67,25 +89,32 @@ a {
   transform: scaleX(0.12);
   transform-origin: center;
   width: 84%;
-  animation: openingLogoLine 2600ms ease 420ms forwards;
 }
 
-.opening-logo__pulse {
-  animation: openingLogoPulse 1550ms ease-out 620ms forwards;
-  border: 1px solid rgba(183, 155, 107, 0.28);
-  border-radius: 999px;
-  height: 140%;
+.opening-logo__halo {
+  animation: openingLogoHalo 2600ms cubic-bezier(0.19, 1, 0.22, 1) 420ms forwards;
+  background: radial-gradient(ellipse at center, rgba(183, 155, 107, 0.18), transparent 62%);
+  filter: blur(18px);
+  height: 210%;
   opacity: 0;
   position: absolute;
+  transform: scale(0.78);
   width: 112%;
 }
 
-.opening-logo__pulse--delay {
-  animation-delay: 1000ms;
+.opening-logo__scan {
+  animation: openingLogoScan 1700ms cubic-bezier(0.19, 1, 0.22, 1) 760ms forwards;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), rgba(183, 155, 107, 0.22), transparent);
+  height: 180%;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-160%) skewX(-18deg);
+  width: 18%;
+  z-index: 2;
 }
 
 .opening-logo img {
-  animation: openingLogoMark 3200ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: openingLogoMark 3400ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
   display: block;
   filter: drop-shadow(0 18px 34px rgba(16, 35, 57, 0.08));
   height: auto;
@@ -94,50 +123,46 @@ a {
   opacity: 0;
   object-fit: contain;
   width: auto;
+  z-index: 1;
 }
 
 .opening-logo.is-hidden {
   display: none;
 }
 
-@keyframes openingLogoFloat {
+@keyframes openingLogoStage {
   0% {
-    transform: translateY(10px);
+    filter: blur(8px);
+    transform: translateY(16px) scale(0.985);
   }
 
-  48%,
+  34%,
   78% {
-    transform: translateY(0);
+    filter: blur(0);
+    transform: translateY(0) scale(1);
   }
 
   100% {
-    transform: translateY(-8px);
+    filter: blur(6px);
+    transform: translateY(-10px) scale(0.99);
   }
 }
 
 @keyframes openingLogoMark {
   0% {
+    clip-path: inset(0 100% 0 0);
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.985);
   }
 
-  22% {
+  28% {
+    clip-path: inset(0 0 0 0);
     opacity: 1;
     transform: scale(1);
   }
 
-  35% {
-    opacity: 1;
-    transform: scale(1.035);
-  }
-
-  46% {
-    opacity: 1;
-    transform: scale(0.992);
-  }
-
-  58%,
-  82% {
+  80% {
+    clip-path: inset(0 0 0 0);
     opacity: 1;
     transform: scale(1);
   }
@@ -148,19 +173,54 @@ a {
   }
 }
 
-@keyframes openingLogoPulse {
+@keyframes openingLogoHalo {
   0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.78);
   }
 
-  18% {
-    opacity: 0.55;
+  38%,
+  72% {
+    opacity: 1;
+    transform: scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: scale(1.28);
+    transform: scale(1.12);
+  }
+}
+
+@keyframes openingLogoOrbit {
+  0% {
+    opacity: 0;
+    transform: scale(0.62) rotate(-24deg);
+  }
+
+  44% {
+    opacity: 1;
+    transform: scale(1) rotate(8deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.12) rotate(24deg);
+  }
+}
+
+@keyframes openingLogoScan {
+  0% {
+    opacity: 0;
+    transform: translateX(-160%) skewX(-18deg);
+  }
+
+  20% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(560%) skewX(-18deg);
   }
 }
 
@@ -197,7 +257,9 @@ a {
   .opening-logo,
   .opening-logo__stage,
   .opening-logo__stage::before,
-  .opening-logo__pulse,
+  .opening-logo__stage::after,
+  .opening-logo__halo,
+  .opening-logo__scan,
   .opening-logo img {
     animation-duration: 1ms;
     animation-delay: 0ms;
@@ -521,6 +583,21 @@ h1 {
   padding: clamp(70px, 10vw, 130px) clamp(22px, 6vw, 96px);
 }
 
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 32px;
+}
+
+.contact-details a {
+  border-bottom: 1px solid rgba(255, 250, 242, 0.28);
+  color: rgba(255, 250, 242, 0.76);
+  font-size: 14px;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
 form {
   display: grid;
   gap: 24px;
@@ -589,6 +666,58 @@ footer {
   width: 150px;
 }
 
+.whatsapp-float {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(255, 250, 242, 0.82)),
+    linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(183, 155, 107, 0.18));
+  border: 1px solid rgba(255, 250, 242, 0.72);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
+  color: var(--ink);
+  display: inline-flex;
+  gap: 10px;
+  min-height: 52px;
+  overflow: hidden;
+  padding: 0 18px 0 14px;
+  position: fixed;
+  right: clamp(18px, 3vw, 38px);
+  bottom: clamp(18px, 3vw, 36px);
+  z-index: 30;
+}
+
+.whatsapp-float__glow {
+  animation: whatsappGlow 2800ms ease-in-out infinite;
+  background: radial-gradient(circle, rgba(37, 211, 102, 0.38), transparent 68%);
+  inset: -22px;
+  position: absolute;
+}
+
+.whatsapp-float svg {
+  fill: #1f9d55;
+  height: 24px;
+  position: relative;
+  width: 24px;
+}
+
+.whatsapp-float span:last-child {
+  font-size: 12px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+@keyframes whatsappGlow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
 @media (max-width: 860px) {
   .site-header {
     padding: 18px 18px;
@@ -650,5 +779,16 @@ footer {
   footer {
     align-items: start;
     flex-direction: column;
+  }
+
+  .whatsapp-float {
+    min-height: 48px;
+    padding: 0 14px 0 12px;
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .whatsapp-float span:last-child {
+    display: none;
   }
 }
