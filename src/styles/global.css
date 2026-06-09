@@ -223,24 +223,17 @@ a {
 .brand {
   align-items: center;
   display: inline-flex;
-  gap: 14px;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.brand-mark {
-  border: 1px solid currentColor;
-  display: grid;
-  font-family: Georgia, serif;
-  font-size: 18px;
   height: 42px;
-  place-items: center;
-  width: 42px;
 }
 
-.brand-name {
-  font-size: 13px;
-  letter-spacing: 0;
+.brand-logo {
+  display: block;
+  filter: brightness(0) invert(1);
+  height: auto;
+  max-height: 34px;
+  object-fit: contain;
+  opacity: 0.96;
+  width: clamp(132px, 14vw, 190px);
 }
 
 .primary-nav {
@@ -586,9 +579,23 @@ footer {
   text-transform: uppercase;
 }
 
+.footer-logo {
+  display: block;
+  filter: brightness(0) invert(1);
+  height: auto;
+  max-height: 28px;
+  object-fit: contain;
+  opacity: 0.72;
+  width: 150px;
+}
+
 @media (max-width: 860px) {
   .site-header {
     padding: 18px 18px;
+  }
+
+  .brand-logo {
+    width: 134px;
   }
 
   .menu-toggle {
